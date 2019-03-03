@@ -1,45 +1,47 @@
 import os
 import csv
-#open CSV File
-csvpath = os.path.join('..\Resources\budget_data.csv')
-with open(csvpath) as csvfile:
-    #Read and delimit the data
+
+csv_file_path_db = os.path.join('..\Resources\budget_data.csv')
+with open(csv_file_path_db) as csvfile:
+    
     csvreader=csv.reader(csvfile,delimiter=',')
-    #Initialize Variable
-    months=0
-    revenue=0
-    # Counts the Total Rows
+   
+    month_count=0
+    revenue_total_count=0
+    
     rows=[r for r in csvreader]
-    #Defaulting to the First Value available in the Sheet
-    change_revenue=int(rows[1][1])
-    max = rows[1]
-    min=rows[1]
-    #Looping through Data
+    
+    change_revenue_total_count=int(rows[1][1])
+
+    max_value = rows[1]
+    min_value=rows[1]
+
+    
     for i in range(1,len(rows)):
         
-        months=months+1
+        month_count=month_count+1
         row=rows[i]
-        revenue= int(row[1]) + revenue
+        revenue_total_count= int(row[1]) + revenue_total_count
         
-        #Excluding the Header Row
+        
         if i > 1:
-            change_revenue=change_revenue + int(row[1])-int(rows[i-1][1])
-        #Finding and Max Revenue
-        if int(max[1]) < int(row[1]):
-            max=row
-        #Finding and Min Revenue
-        if int(min[1]) > int(row[1]):
-            min=row
-#Calculating Average and Average Change in Revenue
-average= int(revenue /months)
-average_change_revenue=int(change_revenue/months)
+            change_revenue_total_count=change_revenue_total_count + int(row[1])-int(rows[i-1][1])
+        
+        if int(max_value[1]) < int(row[1]):
+            max_value=row
+        
+        if int(min_value[1]) > int(row[1]):
+            min_value=row
 
-#Printing the Outputs
-print("Financial Analysis")
-print("------------------")
-print("Total Months: " + str(months))
-print("Total Revenue: " +"$" +str(revenue))       
-print("Average Revenue Change: " +"$"+ str(average))
-print("Average Change in Revenue Change: " +"$"+ str(average_change_revenue))
-print("Greatest Increase in Revenue:" + str(max[0])+" ($" + str(max[1])+")")
-print("Greatest Decrease in Revenue:" + str(min[0])+" ($" + str(min[1])+")")
+average= int(revenue_total_count /month_count)
+average_change_revenue_total_count=int(change_revenue_total_count/month_count)
+
+
+print("Results")
+print("****************")
+print("Total time period in terms of Months: " + str(month_count))
+print("Total revenue: " +"$" +str(revenue_total_count))       
+print("Average revenue Change: " +"$"+ str(average))
+print("Average Change in revenue Change: " +"$"+ str(average_change_revenue_total_count))
+print("Greatest Increase in revenue:" + str(max_value[0])+" ($" + str(max_value[1])+")")
+print("Greatest Decrease in revenue:" + str(min_value[0])+" ($" + str(min_value[1])+")")
