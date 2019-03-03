@@ -2,7 +2,7 @@
 import os
 import csv
 
-file_db = input("Enter the filename you want to analyze ")
+file_db = input("Enter the name  of the file you want to analyze ")
 votes = 0
 candidate_db_ = ""
 candidate_db__votes = {}
